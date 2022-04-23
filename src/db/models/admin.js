@@ -1,35 +1,35 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const USER_TABLE = 'users';
+const ADMIN_TABLE = 'admins';
 
-const UserSchema = {
+const AdminSchema = {
     id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    username: {
+    name: {
         allowNull: false,
         type: DataTypes.STRING,
-        unique: true
+        unique: false
     },
-    email: {
+    lastname: {
         allowNull: false,
         type: DataTypes.STRING,
-        unique: true
+        unique: false
     },
-    password: {
-        allowNull: false,
-        type: DataTypes.STRING,
-    },
-    role: {
+    userId: {
+        field: 'user_id',
         allowNull: false,
         type: DataTypes.INTEGER,
-    },
-    recovery: {
-        allowNull: true,
-        type: DataTypes.STRING,
+        unique: true,
+        references: {
+            model: ADMIN_TABLE,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
     },
     createdAt: {
         allowNull: false,
@@ -39,22 +39,22 @@ const UserSchema = {
     }
 }
 
-class User extends Model {
+class Admin extends Model {
     static associate(models){
-        
+        this.belongsTo(models.User, { as: 'user' });
     }
     static config(sequelize){
         return {
             sequelize,
-            tableName: USER_TABLE,
-            modelName: 'User',
+            tableName: ADMIN_TABLE,
+            modelName: 'Admin',
             timestamps: false,
         }
     }
 }
 
 module.exports = {
-    User,
-    USER_TABLE,
-    UserSchema
+    Admin,
+    ADMIN_TABLE,
+    AdminSchema
 }

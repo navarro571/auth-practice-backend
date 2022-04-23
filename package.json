@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/server.ts",
-    "start:nodemon": "nodemon",
+    "start": "node ./src/server.js",
+    "dev": "nodemon index.js",
     "start:prod": "npm run build && node /dist/src/server.js",
     "build": "npx tsc",
     "migrations:generate": "sequelize-cli migration:generate --name",

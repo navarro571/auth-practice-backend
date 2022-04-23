@@ -1,6 +1,6 @@
-import { Sequelize } from 'sequelize';
-import setup from 'src/db/models';
-import config from 'src/config/config';
+const { Sequelize } = require('sequelize');
+const setup = require('../db/models');
+const { config } = require('../config/config');
 
 const sequelize = new Sequelize(config.databaseUrl, {
     dialect: 'postgres',
@@ -17,4 +17,4 @@ const sequelize = new Sequelize(config.databaseUrl, {
     }
 })();
 
-export default sequelize;
+module.exports = sequelize;

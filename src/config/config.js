@@ -1,4 +1,4 @@
-require('dotenv/config');
+require('dotenv').config();
 
 const config = {
     databaseUrl: process.env.DATABASE_URL,
